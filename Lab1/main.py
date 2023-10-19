@@ -24,6 +24,10 @@ def z(t):
     return np.cos(120 * np.pi * t + np.pi / 3)
 
 
+def sinusR(t):
+    return np.sin(120 * np.pi * t + np.pi / 3)
+
+
 def ex1b():
     plt.figure(figsize=(10, 6))
     plt.subplot(3, 1, 1)
@@ -52,13 +56,8 @@ def ex1c():
     fq = 200
     T = 1
     num_samples = int(fq * T)
-    print(T)
-    print(num_samples)
 
     time_samples = np.linspace(0, T, num_samples, endpoint=False)
-    print(x(time_samples))
-    print(y(time_samples))
-    print(z(time_samples))
     plt.figure(figsize=(10, 6))
 
     plt.subplot(3, 1, 1)
@@ -82,7 +81,101 @@ def ex1c():
     plt.tight_layout()
     plt.show()
 
+
 def ex2a():
+    fq = 400
+    T = 4
+    num_samples = int(fq * T)
+
+    time_samples = np.linspace(0, T, num_samples, endpoint=False)
+    plt.figure(figsize=(10, 6))
+
+    plt.subplot(3, 1, 1)
+    plt.stem(time_samples, sinusR(time_samples), label='a')
+    plt.title('a')
+    plt.grid(True)
+    plt.legend()
+
+    plt.tight_layout()
+    plt.show()
+
+
+def ex2b():
+    fq = 800
+    T = 3
+    num_samples = int(fq * T)
+
+    time_samples = np.linspace(0, T, num_samples, endpoint=False)
+    plt.figure(figsize=(10, 6))
+
+    plt.subplot(3, 1, 1)
+    plt.stem(time_samples, sinusR(time_samples), label='b')
+    plt.title('b')
+    plt.grid(True)
+    plt.legend()
+
+    plt.tight_layout()
+    plt.show()
+
+
+def ex2c():
+    frequency = 240
+    T = 1
+
+    num_samples = int(T * frequency)
+
+    t = np.linspace(0, T, num_samples, endpoint=False)
+
+    sawtooth_signal = t * frequency - np.floor(t * frequency)
+
+    plt.plot(t, sawtooth_signal)
+    plt.title('Semnal "Sawtooth" cu 240 Hz')
+    plt.xlabel('Timp (secunde)')
+    plt.ylabel('Amplitudine')
+    plt.grid(True)
+    plt.show()
+
+
+def ex2d():
+    frequency = 300
+    T = 0.1
+
+    num_samples = int(T * frequency)
+
+    t = np.linspace(0, T, num_samples, endpoint=False)
+
+    plt.plot(t, np.sign(sinusR(t)))
+    plt.title('Semnal "Square" cu 300 Hz folosind numpy.sign')
+    plt.xlabel('Timp (secunde)')
+    plt.ylabel('Amplitudine')
+    plt.grid(True)
+    plt.show()
+
+
+def ex2e():
+    x = 128
+    y = 128
+
+    random_signal = np.random.rand(x, y)
+
+    plt.imshow(random_signal, cmap='gray', interpolation='nearest')
+    plt.title('Semnal 2D Aleator')
+    plt.show()
+
+
+def ex2f():
+    x = 128 * 128
+    combineArray = np.concatenate((np.zeros(int(x / 2)), np.ones(int(x / 2))))
+    np.random.shuffle(combineArray)
+    shuffled_image = combineArray.reshape(128, 128)
+
+    plt.imshow(shuffled_image, cmap='gray',interpolation='nearest')
+    plt.title('Semnal 2D Aleator')
+    plt.show()
+
 
 if __name__ == "__main__":
-    ex1c()
+    ex2f()
+
+    #3.a.0.0005s
+    #3.b.360,000bytes
