@@ -63,6 +63,7 @@ def ex2():
     plt.xlabel("Real Part")
     plt.ylabel("Imaginary Part")
     plt.colorbar()
+    plt.savefig("ex2-fig1.png")
     # Nu am inteles cum trebuie facut ^ .
     # Am reusit cu internet sa fac ceva dar iese o linie dreapta si habar nu am daca e corect
 
@@ -79,6 +80,7 @@ def ex2():
         plt.grid()
     # Banuiesc ca urmarim cum altereaza ω graficul?
     plt.tight_layout()
+    plt.savefig("ex2-fig2.png")
     plt.show()
 
 
@@ -110,8 +112,9 @@ def ex3():
     plt.grid(True)
 
     plt.tight_layout()
+    plt.savefig("ex3.png")
     plt.show()
 
 
 if __name__ == "__main__":
-    ex2()
+    ex3()
