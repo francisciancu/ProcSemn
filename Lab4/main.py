@@ -1,7 +1,6 @@
 import math
-import time
-
 import numpy as np
+import time
 from matplotlib import pyplot as plt
 
 
@@ -40,7 +39,26 @@ def ex1():
     plt.grid(True)
     plt.legend()
     plt.savefig("ex1.png")
+    plt.savefig("ex1.pdf")
     plt.show()
+
+
+# ex4 - 400 - e 2 x cea mai mare frecventa (adica 200) - Nyquist
+
+# ex7
+# SNRdb = 10log10(SNR)
+# 80 = 10 log10(SNR)
+# log10(SNR) = 8
+# SNR = 10^8
+#
+# Psemnaldb = 10log10(Psemnal)
+# 90 = 10log10(Psemnal)
+# Psemanl = 10^9
+#
+# SNR = Psemnal/Pzgomot
+# 10^8 = 10^9/Pzgomot
+# Pzgomot = 10
+# Pzgomotdb = 10log10(10) = 10
 
 
 if __name__ == "__main__":

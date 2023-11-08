@@ -40,6 +40,7 @@ def ex1():
         plt.legend()
 
     plt.savefig("ex1.png")
+    plt.savefig("ex1.pdf")
     plt.show()
 
     if check_matrix_is_unitary(fourier_matrix):
@@ -64,6 +65,7 @@ def ex2():
     plt.ylabel("Imaginary Part")
     plt.colorbar()
     plt.savefig("ex2-fig1.png")
+    plt.savefig("ex2-fig1.pdf")
     # Nu am inteles cum trebuie facut ^ .
     # Am reusit cu internet sa fac ceva dar iese o linie dreapta si habar nu am daca e corect
 
@@ -81,6 +83,7 @@ def ex2():
     # Banuiesc ca urmarim cum altereaza ω graficul?
     plt.tight_layout()
     plt.savefig("ex2-fig2.png")
+    plt.savefig("ex2-fig2.pdf")
     plt.show()
 
 
@@ -113,8 +116,9 @@ def ex3():
 
     plt.tight_layout()
     plt.savefig("ex3.png")
+    plt.savefig("ex3.pdf")
     plt.show()
 
 
 if __name__ == "__main__":
-    ex3()
+    ex1()
