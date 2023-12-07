@@ -3,8 +3,7 @@ from matplotlib import pyplot as plt
 
 
 def ex1(N=1000):
-    size = N
-    time = np.arange(size)
+    time = np.arange(N)
     trend = (time ** 2 + 7 * time + 628)/10000
     season1 = 50 * np.sin(2 * np.pi * 0.05 * time)
     season2 = 30 * np.sin(2 * np.pi * 0.1 * time)
