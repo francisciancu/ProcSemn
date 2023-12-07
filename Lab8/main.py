@@ -37,5 +37,6 @@ def ex1():
         plt.show()
     a()
 
+
 if __name__ == '__main__':
     ex1()
