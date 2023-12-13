@@ -5,7 +5,7 @@ from matplotlib import pyplot as plt
 def ex1():
     def a(N=1000):
         time = np.arange(N)
-        trend = (time ** 2 + 7 * time + 628)/10000
+        trend = (time ** 2 + 7 * time + 628) / 10000
         season1 = 50 * np.sin(2 * np.pi * 0.05 * time)
         season2 = 30 * np.sin(2 * np.pi * 0.1 * time)
         seasonality = season1 + season2
@@ -35,7 +35,22 @@ def ex1():
 
         plt.tight_layout()
         plt.show()
-    a()
+        return time_series, N
+
+    def b():
+        time_series, N = a()
+        autocorr = np.correlate(time_series - np.mean(time_series), time_series - np.mean(time_series), mode='full')
+        autocorr /= np.max(autocorr)
+
+        plt.figure(figsize=(8, 6))
+        plt.title('Autocorrelation of the Time Series')
+        plt.plot(autocorr[N - 1:])
+        plt.xlabel('Lag')
+        plt.ylabel('Autocorrelation')
+        plt.grid(True)
+        plt.show()
+
+    b()
 
 
 if __name__ == '__main__':
