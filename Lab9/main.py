@@ -54,6 +54,5 @@ def ex2(alpha=0.10):
     plt.show()
 
 
-
 if __name__ == '__main__':
     ex2()
