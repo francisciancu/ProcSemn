@@ -188,5 +188,10 @@ if __name__ == '__main__':
             ex3(misc.face(), mseValue)
         else:
             print("Not a valid choice!")
-        if input("Do you want to run again? (y/n)\n") != 'y':
+        answer = input("Do you want to run again? (y/n)\n")
+        while answer != 'y' and answer != 'n':
+            print("Invalid input. Please enter 'y' or 'n'.")
+            answer = input("Do you want to run again? (y/n)\n")
+
+        if answer == 'n':
             repeat = False
