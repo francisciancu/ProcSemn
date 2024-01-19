@@ -95,7 +95,7 @@ if __name__ == "__main__":
 
 
     host_image = Image.open("image.jpg")
-    watermark_image = Image.open("image.jpg")
+    watermark_image = Image.open("watermark1.jpg")
     gray_host_image = host_image.convert("L")
     gray_host_image_np = np.array(gray_host_image)
     gray_watermark_image = watermark_image.convert("L")
@@ -123,7 +123,7 @@ if __name__ == "__main__":
     plt.imshow(scaled_extracted_watermark, cmap='gray')
     plt.title('Extracted Watermark')
 
-    plt.savefig("image+image.png")
+    # plt.savefig("image+image.png")
 
     # plt.subplot(144)
     # plt.imshow(restored_image, cmap='gray')
