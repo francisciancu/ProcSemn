@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy import datasets
 from PIL import Image
+import cv2
 
 
 def haar_wavelet_transform(matrix):
@@ -11,10 +12,31 @@ def haar_wavelet_transform(matrix):
     for i in range(rows):
         transformed_matrix[i, :] = haar_wavelet_1d(transformed_matrix[i, :])
 
-
     for j in range(cols):
         transformed_matrix[:, j] = haar_wavelet_1d(transformed_matrix[:, j])
 
+    LL = transformed_matrix[:rows // 2, :cols // 2]
+    LH = transformed_matrix[:rows // 2, cols // 2:]
+    HL = transformed_matrix[rows // 2:, :cols // 2]
+    HH = transformed_matrix[rows // 2:, cols // 2:]
+
+    plt.subplot(141)
+    plt.imshow(LL, cmap='gray')
+    plt.title('LL Quadrant')
+
+    plt.subplot(142)
+    plt.imshow(LH, cmap='gray')
+    plt.title('LH Quadrant')
+
+    plt.subplot(143)
+    plt.imshow(HL, cmap='gray')
+    plt.title('HL Quadrant')
+
+    plt.subplot(144)
+    plt.imshow(HH, cmap='gray')
+    plt.title('HL Quadrant')
+
+    plt.show()
 
     return transformed_matrix
 
@@ -59,9 +81,10 @@ def inverse_haar_wavelet_1d(signal):
 def embed_watermark(host_image, watermark_image, scaling_factor=0.5):
     host_transformed = haar_wavelet_transform(host_image)
 
-    region = host_transformed[:watermark_image.shape[0] // 2, :watermark_image.shape[1] // 2]
+    region = host_transformed[:host_transformed.shape[0] // 2, :host_transformed.shape[1] // 2]
 
     watermark_image_pil = Image.fromarray(watermark_image)
+
     watermark_image_pil = watermark_image_pil.resize((region.shape[1], region.shape[0]))
 
     resized_watermark = np.array(watermark_image_pil)
@@ -70,7 +93,7 @@ def embed_watermark(host_image, watermark_image, scaling_factor=0.5):
 
     watermarked_image = inverse_haar_wavelet_transform(host_transformed)
 
-    return watermarked_image.astype(np.uint8)
+    return watermarked_image
 
 def extract_watermark(watermarked_image):
     watermarked_transformed = haar_wavelet_transform(watermarked_image)
@@ -79,14 +102,14 @@ def extract_watermark(watermarked_image):
 
     extracted_watermark = inverse_haar_wavelet_transform(extracted_watermark)
 
-    return extracted_watermark.astype(np.uint8)
+    return extracted_watermark
 
 def remove_watermark(watermarked_image, watermark):
     restored_image = watermarked_image.astype(np.float64) - watermark.astype(np.float64)
 
     restored_image = np.clip(restored_image, 0, 255)
 
-    return restored_image.astype(np.uint8)
+    return restored_image
 
 
 if __name__ == "__main__":
@@ -95,13 +118,13 @@ if __name__ == "__main__":
 
 
     host_image = Image.open("image.jpg")
-    watermark_image = Image.open("image.jpg")
+    watermark_image = Image.open("watermark2.jpg")
     gray_host_image = host_image.convert("L")
     gray_host_image_np = np.array(gray_host_image)
     gray_watermark_image = watermark_image.convert("L")
     gray_watermark_image_np = np.array(gray_watermark_image)
 
-    watermarked_image = embed_watermark(gray_host_image_np, gray_watermark_image_np, scaling_factor=1)
+    watermarked_image = embed_watermark(gray_host_image_np, gray_watermark_image_np)
 
     extracted_watermark = extract_watermark(gray_watermark_image_np)
 
@@ -123,7 +146,7 @@ if __name__ == "__main__":
     plt.imshow(scaled_extracted_watermark, cmap='gray')
     plt.title('Extracted Watermark')
 
-    plt.savefig("image+image.png")
+    # plt.savefig("image+image.png")
 
     # plt.subplot(144)
     # plt.imshow(restored_image, cmap='gray')
