@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image, ImageChops
+from scipy import datasets
 
 
 def haar_wavelet_transform(matrix):
@@ -33,6 +34,8 @@ def haar_wavelet_transform(matrix):
     plt.subplot(144)
     plt.imshow(HH, cmap='gray')
     plt.title('HL Quadrant')
+
+    plt.savefig("watermark2 quadrant.pdf")
 
     plt.show()
 
@@ -109,7 +112,6 @@ def extract_watermark(watermarked_image):
 
 
 def remove_watermark(watermarked_image, watermark, option="toSmaller"):
-
     if option in ('toSmaller', 'toBigger'):
         if option == "toSmaller":
             if watermarked_image.shape[1] > watermark.shape[1]:
@@ -151,11 +153,6 @@ def compare_origina_restored(original, watermarked, name_of_file):
     original_img = Image.fromarray(original)
     watermarked_img = Image.fromarray(watermarked)
 
-    if original_img.mode != 'RGB':
-        original_img = original_img.convert('RGB')
-    if watermarked_img.mode != 'RGB':
-        watermarked_img = watermarked_img.convert('RGB')
-
     if original_img.mode != watermarked_img.mode:
         watermarked_img = watermarked_img.convert(original_img.mode)
 
@@ -164,7 +161,7 @@ def compare_origina_restored(original, watermarked, name_of_file):
     if diff.getbbox() is None:
         return True
     else:
-        diff.save(f"{name_of_file}.png")
+        diff.save(f"{name_of_file}.pdf")
         return False
 
 
@@ -173,7 +170,7 @@ if __name__ == "__main__":
     # watermark_image = datasets.face(gray=True)
 
     host_image = Image.open("image.jpg")
-    watermark_image = Image.open("watermark2.jpg")
+    watermark_image = Image.open("watermark1.jpg")
     gray_host_image = host_image.convert("L")
     gray_host_image_np = np.array(gray_host_image)
     gray_watermark_image = watermark_image.convert("L")
@@ -203,8 +200,9 @@ if __name__ == "__main__":
     plt.imshow(restored_image, cmap='gray')
     plt.title('Restored Image (Watermark Removed)')
 
-    plt.savefig("image + watermark2.png")
+    plt.savefig("image + watermark1.pdf")
     plt.show()
 
-    compare_origina_restored(gray_host_image_np, restored_image, "original vs restored_image (image + watermark2)")
-    compare_origina_restored(gray_host_image_np, watermarked_image, "original vs watermarked_image (image + watermark2)")
+    compare_origina_restored(gray_host_image_np, restored_image, "original vs restored_image (image + watermark1)")
+    compare_origina_restored(gray_host_image_np, watermarked_image,
+                             "original vs watermarked_image (image + watermark1)")
