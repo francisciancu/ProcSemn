@@ -169,8 +169,8 @@ if __name__ == "__main__":
     # host_image = datasets.face(gray=True)
     # watermark_image = datasets.face(gray=True)
 
-    host_image = Image.open("image.jpg")
-    watermark_image = Image.open("watermark1.jpg")
+    host_image = Image.open("resources/original/image.jpg")
+    watermark_image = Image.open("resources/watermarks/watermark1.jpg")
     gray_host_image = host_image.convert("L")
     gray_host_image_np = np.array(gray_host_image)
     gray_watermark_image = watermark_image.convert("L")
