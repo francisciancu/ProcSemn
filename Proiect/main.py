@@ -155,7 +155,6 @@ def compare_origina_restored(original, watermarked, name_of_file):
         original_img = original_img.convert('RGB')
     if watermarked_img.mode != 'RGB':
         watermarked_img = watermarked_img.convert('RGB')
-    watermarked_img.save("watermarked_image_test.png")
 
     if original_img.mode != watermarked_img.mode:
         watermarked_img = watermarked_img.convert(original_img.mode)
@@ -174,7 +173,7 @@ if __name__ == "__main__":
     # watermark_image = datasets.face(gray=True)
 
     host_image = Image.open("image.jpg")
-    watermark_image = Image.open("image.jpg")
+    watermark_image = Image.open("watermark2.jpg")
     gray_host_image = host_image.convert("L")
     gray_host_image_np = np.array(gray_host_image)
     gray_watermark_image = watermark_image.convert("L")
@@ -204,8 +203,8 @@ if __name__ == "__main__":
     plt.imshow(restored_image, cmap='gray')
     plt.title('Restored Image (Watermark Removed)')
 
-    plt.savefig("image + image.png")
+    plt.savefig("image + watermark2.png")
     plt.show()
 
-    compare_origina_restored(gray_host_image_np, restored_image, "original vs restored_image")
-    compare_origina_restored(gray_host_image_np, watermarked_image, "original vs watermarked_image")
+    compare_origina_restored(gray_host_image_np, restored_image, "original vs restored_image (image + watermark2)")
+    compare_origina_restored(gray_host_image_np, watermarked_image, "original vs watermarked_image (image + watermark2)")
