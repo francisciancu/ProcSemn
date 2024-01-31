@@ -2,7 +2,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy import datasets
 from PIL import Image
-import cv2
 
 
 def haar_wavelet_transform(matrix):
@@ -124,7 +123,7 @@ if __name__ == "__main__":
     gray_watermark_image = watermark_image.convert("L")
     gray_watermark_image_np = np.array(gray_watermark_image)
 
-    watermarked_image = embed_watermark(gray_host_image_np, gray_watermark_image_np)
+    watermarked_image = embed_watermark(gray_host_image_np, gray_watermark_image_np, scaling_factor=1)
 
     extracted_watermark = extract_watermark(gray_watermark_image_np)
 
